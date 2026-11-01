@@ -1,0 +1,18 @@
+{
+  "[csharp]": {
+    "editor.defaultFormatter": "ms-dotnettools.csharp",
+    "editor.codeActionsOnSave": ["source.organizeImports", "source.fixAll"]
+  },
+  "commandOnAllFiles.commands": {
+    "Format C# 1": {
+      "command": "editor.action.formatDocument",
+      "includeFileExtensions": [".cs"],
+      "includeFolders": ["ScrcpyLauncherForCommandPalette"],
+    },
+    "Sort Using C# 1": {
+      "command": "csharpsortusings.sortUsings",
+      "includeFileExtensions": [".cs"],
+      "includeFolders": ["ScrcpyLauncherForCommandPalette"],
+    }
+  },
+}

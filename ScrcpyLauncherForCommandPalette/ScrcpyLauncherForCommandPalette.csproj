@@ -1,0 +1,149 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ScrcpyLauncherForCommandPalette</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <Product>scrcpy Launcher for Command Palette</Product>
+    <AssemblyTitle>scrcpy Launcher for Command Palette</AssemblyTitle>
+    <WindowsPackageType Condition="'$(BuildingInsideVisualStudio)' != 'true'">None</WindowsPackageType>
+
+    <WindowsSdkPackageVersion>10.0.26100.38</WindowsSdkPackageVersion>
+    <TargetFramework>net10.0-windows10.0.22621.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <SupportedOSPlatformVersion>10.0.17763.0</SupportedOSPlatformVersion>
+    <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
+
+    <PublishProfile>win-$(Platform).pubxml</PublishProfile>
+    <EnableMsixTooling>true</EnableMsixTooling>
+    <Nullable>enable</Nullable>
+
+    <AssemblyVersion>1.8.0.0</AssemblyVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="extensionsdk\**" />
+    <EmbeddedResource Remove="extensionsdk\**" />
+    <None Remove="extensionsdk\**" />
+    <Page Remove="extensionsdk\**" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Platform)' == 'ARM64'">
+      <DefineConstants>$(DefineConstants);ARM64</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Platform)' == 'x64'">
+      <DefineConstants>$(DefineConstants);X64</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Manifest Condition="'$(BuildingInsideVisualStudio)' == 'true'" Include="$(ApplicationManifest)" />
+  </ItemGroup>
+
+  <!--
+    Defining the "Msix" ProjectCapability here allows the Single-project MSIX Packaging
+    Tools extension to be activated for this project even if the Windows App SDK Nuget
+    package has not yet been restored.
+  -->
+  <ItemGroup Condition="'$(DisableMsixProjectCapabilityAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <ProjectCapability Include="Msix" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <AssemblyName>ScrcpyLauncherForCommandPaletteDev</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(BuildingInsideVisualStudio)' == 'true'">   
+    <AppxManifest Include="Package.appxmanifest" Condition="'$(Configuration)' == 'Release'" />
+    <AppxManifest Include="Package-Dev.appxmanifest" Condition="'$(Configuration)' == 'Debug'" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CommandPalette.Extensions" />
+    <PackageReference Include="Microsoft.WindowsAppSDK" />
+    <PackageReference Include="ToolGood.Words.Pinyin" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Assets\**\*.*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <!--
+    Defining the "HasPackageAndPublishMenuAddedByProject" property here allows the Solution
+    Explorer "Package and Publish" context menu entry to be enabled for this project even if
+    the Windows App SDK Nuget package has not yet been restored.
+  -->
+  <PropertyGroup Condition="'$(DisableHasPackageAndPublishMenuAddedByProject)'!='true' and '$(EnableMsixTooling)'=='true'">
+    <HasPackageAndPublishMenu>true</HasPackageAndPublishMenu>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <IsAotCompatible>true</IsAotCompatible>
+    <CsWinRTAotOptimizerEnabled>true</CsWinRTAotOptimizerEnabled>
+    <CsWinRTAotWarningLevel>2</CsWinRTAotWarningLevel>
+    <!-- Suppress DynamicallyAccessedMemberTypes.PublicParameterlessConstructor in fallback code path of Windows SDK projection -->
+    <WarningsNotAsErrors>IL2081</WarningsNotAsErrors>
+
+    <PublishTrimmed>true</PublishTrimmed>
+    <TrimMode>full</TrimMode>
+    <PublishAot>true</PublishAot>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppxPackageSigningEnabled>False</AppxPackageSigningEnabled>
+    <AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+    <AppxAutoIncrementPackageRevision>False</AppxAutoIncrementPackageRevision>
+    <AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+    <GenerateTestArtifacts>False</GenerateTestArtifacts>
+    <AppxPackageCompressionLevel>Maximum</AppxPackageCompressionLevel>
+    <AppxBundle>Auto</AppxBundle>
+    <AppxBundlePlatforms>x64|arm64</AppxBundlePlatforms>
+    <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
+    <GenerateTemporaryStoreCertificate>True</GenerateTemporaryStoreCertificate>
+    <AppxPackageDir>..\AppPackages\</AppxPackageDir>
+  </PropertyGroup>
+
+  <!-- Native AOT compiler, runtime size, and symbol optimizations for Release -->
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <OptimizationPreference>Size</OptimizationPreference>
+    <IlcFoldIdenticalMethodBodies>true</IlcFoldIdenticalMethodBodies>
+    <IlcTrimTypeHierarchyData>true</IlcTrimTypeHierarchyData>
+    <IlcGenerateCompleteTypeMetadata>false</IlcGenerateCompleteTypeMetadata>
+    <StackTraceSupport>false</StackTraceSupport>
+    <IlcGenerateStackTraceData>false</IlcGenerateStackTraceData>
+    <InvariantGlobalization>true</InvariantGlobalization>
+    <EventSourceSupport>false</EventSourceSupport>
+    <UseSystemResourceKeys>true</UseSystemResourceKeys>
+    <HttpActivityPropagationSupport>false</HttpActivityPropagationSupport>
+    <MetadataUpdaterSupport>false</MetadataUpdaterSupport>
+    <DebuggerSupport>false</DebuggerSupport>
+    <StartupHookSupport>false</StartupHookSupport>
+    <CustomResourceTypesSupport>false</CustomResourceTypesSupport>
+
+    <!-- Prevent debug symbols / PDBs from being included inside the MSIX package -->
+    <DebugType>none</DebugType>
+    <StripSymbols>true</StripSymbols>
+    <AppxPackageIncludePrivateSymbols>false</AppxPackageIncludePrivateSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IsPublishable>True</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <IsPublishable>True</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IsPublishable>True</IsPublishable>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <IsPublishable>True</IsPublishable>
+  </PropertyGroup>
+
+  <Target Name="LogContext" BeforeTargets="BeforeBuild">
+    <Message Text="BuildingInsideVisualStudio = '$(BuildingInsideVisualStudio)'" Importance="High" />
+    <Message Text="Building project from '$(MSBuildProjectFullPath)'" Importance="High" />
+  </Target>
+
+  <ItemGroup>
+    <PRIResource Remove="extensionsdk\**" />
+  </ItemGroup>
+</Project>

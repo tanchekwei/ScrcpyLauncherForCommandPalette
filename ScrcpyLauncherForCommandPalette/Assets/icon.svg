@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="96"
+     height="96"
+     viewBox="12 12 72 72"
+     preserveAspectRatio="none">
+
+  <defs>
+    <clipPath id="c">
+      <path d="M4 6h88c2.209 0 4 1.791 4 4v76H0V10c0-2.209 1.791-4 4-4z"/>
+    </clipPath>
+
+    <path id="b" d="M52.354 1.923A3 3 0 0 1 55.154 0H75a3 3 0 0 1 2.8 4.077L67.06 32H93a3 3 0 0 1 2.076 5.166l-48 46a3 3 0 0 1-4.876-3.243L54.478 48H39a3 3 0 0 1-2.8-4.077z"/>
+  </defs>
+
+  <g transform="translate(0 5)">
+    <path fill="#3660d8"
+          d="M16 10h64a4 4 0 0 1 4 4v54H12V14a4 4 0 0 1 4-4z"/>
+
+    <g fill="#41d0eb" opacity=".2" clip-path="url(#c)">
+      <g transform="translate(5 0) scale(.14)">
+        <use href="#b" x="35.7" y="78.6"/>
+        <use href="#b" x="117.9" y="78.6"/>
+        <use href="#b" x="200" y="78.6"/>
+        <use href="#b" x="282.1" y="78.6"/>
+        <use href="#b" x="364.3" y="78.6"/>
+        <use href="#b" x="450" y="78.6"/>
+
+        <use href="#b" x="35.7" y="178.6"/>
+        <use href="#b" x="117.9" y="178.6"/>
+        <use href="#b" x="200" y="178.6"/>
+        <use href="#b" x="282.1" y="178.6"/>
+        <use href="#b" x="364.3" y="178.6"/>
+        <use href="#b" x="446.4" y="178.6"/>
+
+        <use href="#b" x="35.7" y="278.6"/>
+        <use href="#b" x="117.9" y="278.6"/>
+        <use href="#b" x="200" y="278.6"/>
+        <use href="#b" x="282.1" y="278.6"/>
+        <use href="#b" x="364.3" y="278.6"/>
+        <use href="#b" x="446.4" y="278.6"/>
+
+        <use href="#b" x="35.7" y="378.6"/>
+        <use href="#b" x="117.9" y="378.6"/>
+        <use href="#b" x="200" y="378.6"/>
+        <use href="#b" x="282.1" y="378.6"/>
+        <use href="#b" x="364.3" y="378.6"/>
+        <use href="#b" x="446.4" y="378.6"/>
+      </g>
+    </g>
+
+    <path fill="none"
+          stroke="#41d0eb"
+          stroke-linecap="round"
+          stroke-width="5"
+          d="m32 40-7-11m39 11 7-11"/>
+
+    <path fill="#41d0eb"
+          d="M28 51c1-13 11-21 20-21s19 8 20 21c0 2-2 3-4 3H32c-2 0-4-1-4-3z"/>
+
+    <circle cx="38" cy="40" r="3" fill="#fff"/>
+    <circle cx="58" cy="40" r="3" fill="#fff"/>
+
+    <path fill="#e4e4e4"
+          d="M12 68v4c0 2 2 4 4 4h64c2 0 4-2 4-4v-4z"/>
+  </g>
+</svg>

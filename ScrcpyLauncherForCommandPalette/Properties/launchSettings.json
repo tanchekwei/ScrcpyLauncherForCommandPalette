@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "ScrcpyLauncherForCommandPalette (Package)": {
+      "commandName": "MsixPackage",
+      "doNotLaunchApp": true
+    },
+    "ScrcpyLauncherForCommandPalette (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
